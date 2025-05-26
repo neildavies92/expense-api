@@ -1,4 +1,4 @@
-.PHONY: run build test clean docker-up docker-down
+.PHONY: run build test clean up down
 
 # Binary name
 BINARY_NAME=<REPLACE>
