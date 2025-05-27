@@ -27,7 +27,7 @@ func Load() (*Config, error) {
 			Port:     getEnvOrDefault("DB_PORT", "5432"),
 			User:     getEnvOrDefault("DB_USER", "postgres"),
 			Password: getEnvOrDefault("DB_PASSWORD", "postgres"),
-			DBName:   getEnvOrDefault("DB_NAME", "microservice"),
+			DBName:   getEnvOrDefault("DB_NAME", "<REPLACE>"),
 			SSLMode:  getEnvOrDefault("DB_SSLMODE", "disable"),
 		},
 	}
