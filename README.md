@@ -5,33 +5,53 @@ A template repository for creating Go microservices with PostgreSQL, structured 
 ## Getting Started
 
 1. Clone this repository:
+
 ```bash
 git clone https://github.com/bryx/go-microservice-template.git <your-service-name>
 cd <your-service-name>
 ```
 
-2. Run the setup script to replace all instances of `<REPLACE>` with your service name:
+2. Change the upstream repository to your new repository:
+
+```bash
+
+# Remove the original remote
+git remote remove origin
+
+# Add your new repository as the origin
+git remote add origin https://github.com/your-username/<your-service-name>.git
+
+# Push to your new repository
+git push -u origin main
+```
+
+3. Run the setup script to replace all instances of `<REPLACE>` with your service name:
+
 ```bash
 ./bin/setup.sh --service-name your-service-name
 ```
 
 The script will:
+
 - Validate the service name format (lowercase letters, numbers, and hyphens only)
 - Replace all instances of `<REPLACE>` in the codebase
 - Update module paths to `github.com/bryx/your-service-name`
 - Update binary names and database names
 
-3. Start the PostgreSQL database:
+4. Start the PostgreSQL database:
+
 ```bash
 make up
 ```
 
-4. Install dependencies:
+5. Install dependencies:
+
 ```bash
 go mod tidy
 ```
 
-5. Run the application:
+6. Run the application:
+
 ```bash
 make run
 ```
@@ -65,6 +85,7 @@ The server will start on port 8080 by default. You can change this by setting th
 ## Testing
 
 Run the tests with:
+
 ```bash
 make test
 ```
