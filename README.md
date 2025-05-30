@@ -19,7 +19,7 @@ cd <your-service-name>
 git remote remove origin
 
 # Add your new repository as the origin
-git remote add origin https://github.com/your-username/<your-service-name>.git
+git remote add origin https://github.com/your-username/your-service-name.git
 
 # Push to your new repository
 git push -u origin main
