@@ -22,7 +22,7 @@ clean:
 
 # Start docker containers
 up:
-	docker-compose up --build
+	docker-compose up -d --build
 
 # Stop docker containers
 down:
