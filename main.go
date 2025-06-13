@@ -9,9 +9,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/bryx/<REPLACE>/config"
-	"github.com/bryx/<REPLACE>/internal/database"
-	"github.com/bryx/<REPLACE>/internal/handlers"
+	"github.com/bryx/expense-api/config"
+	"github.com/bryx/expense-api/internal/database"
+	"github.com/bryx/expense-api/internal/handlers"
 )
 
 func main() {

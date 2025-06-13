@@ -1,7 +1,7 @@
 .PHONY: run build test clean up down
 
 # Binary name
-BINARY_NAME=<REPLACE>
+BINARY_NAME=expense-api
 
 # Build the application
 build:
@@ -22,8 +22,8 @@ clean:
 
 # Start docker containers
 up:
-	docker-compose up -d
+	docker-compose up --build
 
 # Stop docker containers
 down:
-	docker-compose down
+	docker-compose down -v

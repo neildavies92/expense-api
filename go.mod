@@ -1,4 +1,4 @@
-module github.com/bryx/<REPLACE>
+module github.com/bryx/expense-api
 
 go 1.21
 

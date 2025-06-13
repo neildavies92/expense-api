@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log/slog"
 
-	"github.com/bryx/<REPLACE>/config"
+	"github.com/bryx/expense-api/config"
 
 	_ "github.com/lib/pq"
 )

@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/bryx/<REPLACE>/internal/database"
+	"github.com/bryx/expense-api/internal/database"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
