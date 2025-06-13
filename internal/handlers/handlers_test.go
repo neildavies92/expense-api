@@ -11,7 +11,7 @@ func TestHealthCheck(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/health", nil)
 	w := httptest.NewRecorder()
 
-	h.HealthCheck(w, req)
+	h.handleHealthCheck(w, req)
 
 	if w.Code != http.StatusOK {
 		t.Errorf("expected status code %d, got %d", http.StatusOK, w.Code)
