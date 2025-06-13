@@ -45,10 +45,10 @@ The following environment variables are configured in the Docker Compose file:
 - `PORT` - Server port (default: "8080")
 - `DB_HOST` - Database host (default: "postgres")
 - `DB_PORT` - Database port (default: "5432")
+- `DB_NAME` - Database name (default: "expense-api")
 - `DB_USER` - Database user (default: "postgres")
-- `DB_PASSWORD`
-- `DB_NAME`
-- `DB_SSLMODE`
+- `DB_PASSWORD` - Database password (default: "postgres")
+- `DB_SSLMODE` - Database SSL mode (default: "disable")
 
 ## Development
 
