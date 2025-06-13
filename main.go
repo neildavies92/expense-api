@@ -11,13 +11,14 @@ import (
 
 	"github.com/bryx/expense-api/config"
 	"github.com/bryx/expense-api/internal/database"
+	"github.com/bryx/expense-api/internal/errors"
 	"github.com/bryx/expense-api/internal/handlers"
 )
 
 func main() {
 	cfg, err := config.Load()
 	if err != nil {
-		slog.Error("failed to load configuration", "error", err)
+		slog.Error("failed to load configuration", "error", errors.ErrorMessage(err))
 		os.Exit(1)
 	}
 
@@ -26,7 +27,7 @@ func main() {
 
 	db, err := database.NewConnection(cfg.Database)
 	if err != nil {
-		slog.Error("failed to connect to database", "error", err)
+		slog.Error("failed to connect to database", "error", errors.ErrorMessage(err))
 		os.Exit(1)
 	}
 	defer db.Close()
@@ -42,7 +43,7 @@ func main() {
 	go func() {
 		slog.Info("starting server", "port", cfg.Port)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			slog.Error("failed to start server", "error", err)
+			slog.Error("failed to start server", "error", errors.ErrorMessage(err))
 			os.Exit(1)
 		}
 	}()
@@ -56,7 +57,7 @@ func main() {
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
-		slog.Error("server forced to shutdown", "error", err)
+		slog.Error("server forced to shutdown", "error", errors.ErrorMessage(err))
 		os.Exit(1)
 	}
 }
