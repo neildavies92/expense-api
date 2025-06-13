@@ -24,6 +24,7 @@ func SetupRoutes(h *Handler) http.Handler {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.RealIP)
 
+	r.Get("/expense", h.Expense)
 	r.Get("/health", h.HealthCheck)
 
 	return r
@@ -32,4 +33,10 @@ func SetupRoutes(h *Handler) http.Handler {
 func (h *Handler) HealthCheck(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("OK"))
+}
+
+func (h *Handler) Expense(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"status": "ok", "message": "Expense API is running"}`))
 }
