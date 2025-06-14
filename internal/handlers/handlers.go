@@ -29,9 +29,10 @@ func SetupRoutes(h *Handler) http.Handler {
 	r.Get("/health", h.handleHealthCheck)
 
 	r.Route("/expense", func(r chi.Router) {
+		r.Get("/", h.handleGetExpenses)
 		r.Post("/", h.handlePostExpense)
 		r.Route("/{id}", func(r chi.Router) {
-			r.Get("/", h.handleGetExpense)
+			r.Get("/", h.handleGetExpenses)
 		})
 	})
 	return r
@@ -42,10 +43,23 @@ func (h *Handler) handleHealthCheck(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("OK"))
 }
 
-func (h *Handler) handleGetExpense(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) handleGetExpenses(w http.ResponseWriter, r *http.Request) {
+	expenses, err := h.db.GetExpenses()
+	if err != nil {
+		status := errors.HTTPStatus(err)
+		w.WriteHeader(status)
+		json.NewEncoder(w).Encode(map[string]string{
+			"error": errors.ErrorMessage(err),
+		})
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"status": "ok", "message": "Expense API is running"}`))
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"status": http.StatusOK,
+		"data":   expenses,
+	})
 }
 
 func (h *Handler) handlePostExpense(w http.ResponseWriter, r *http.Request) {

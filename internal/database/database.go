@@ -27,3 +27,27 @@ func NewConnection(cfg config.DatabaseConfig) (*DB, error) {
 	slog.Info("successfully connected to database")
 	return &DB{db}, nil
 }
+
+func (db *DB) GetExpenses() ([]Expense, error) {
+	query := `SELECT id, expense, expense_amount, due_date FROM expenses ORDER BY id DESC`
+	rows, err := db.Query(query)
+	if err != nil {
+		return nil, errors.ErrNotFound
+	}
+	defer rows.Close()
+
+	var expenses []Expense
+	for rows.Next() {
+		var e Expense
+		if err := rows.Scan(&e.ID, &e.Expense, &e.ExpenseAmount, &e.DueDate); err != nil {
+			return nil, errors.ErrInvalidInput
+		}
+		expenses = append(expenses, e)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, errors.ErrInvalidInput
+	}
+
+	return expenses, nil
+}
