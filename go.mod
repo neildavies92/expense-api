@@ -1,4 +1,4 @@
-module github.com/bryx/expense-api
+module github.com/neildavies92/expense-api
 
 go 1.21
 

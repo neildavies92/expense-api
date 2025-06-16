@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/bryx/expense-api/internal/database"
-	"github.com/bryx/expense-api/internal/errors"
+	"github.com/neildavies92/expense-api/internal/database"
+	"github.com/neildavies92/expense-api/internal/errors"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"

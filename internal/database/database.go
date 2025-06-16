@@ -4,8 +4,9 @@ import (
 	"database/sql"
 	"log/slog"
 
-	"github.com/bryx/expense-api/config"
-	"github.com/bryx/expense-api/internal/errors"
+	"github.com/neildavies92/expense-api/config"
+	"github.com/neildavies92/expense-api/internal/errors"
+	"github.com/neildavies92/expense-api/internal/models"
 
 	_ "github.com/lib/pq"
 )
@@ -28,7 +29,7 @@ func NewConnection(cfg config.DatabaseConfig) (*DB, error) {
 	return &DB{db}, nil
 }
 
-func (db *DB) GetExpenses() ([]Expense, error) {
+func (db *DB) GetExpenses() ([]models.Expense, error) {
 	query := `SELECT id, expense, expense_amount, due_date FROM expenses ORDER BY id DESC`
 	rows, err := db.Query(query)
 	if err != nil {
@@ -36,9 +37,9 @@ func (db *DB) GetExpenses() ([]Expense, error) {
 	}
 	defer rows.Close()
 
-	var expenses []Expense
+	var expenses []models.Expense
 	for rows.Next() {
-		var e Expense
+		var e models.Expense
 		if err := rows.Scan(&e.ID, &e.Expense, &e.ExpenseAmount, &e.DueDate); err != nil {
 			return nil, errors.ErrInvalidInput
 		}
